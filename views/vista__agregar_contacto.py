@@ -10,31 +10,33 @@ class VistaAgregarContacto(customtkinter.CTkFrame):
         super().__init__(master)
         self.controlador = controlador
         self.columnconfigure(0, weight=1)
+        self.entrada = {}
+        self.boton = {}
 
         # Inicializando comandos
 
         # Entrada de Nombre
-        self.entrada__nombre = customtkinter.CTkEntry(
+        self.entrada['nombre'] = customtkinter.CTkEntry(
             self, placeholder_text="Nombre")
-        self.entrada__nombre.grid(
+        self.entrada['nombre'].grid(
             column=0, row=0, sticky="we", padx=20, pady=(20, 0))
 
         # Entrada de Numero
-        self.entrada__nombre = customtkinter.CTkEntry(
+        self.entrada['numero'] = customtkinter.CTkEntry(
             self, placeholder_text="Numero")
-        self.entrada__nombre.grid(
+        self.entrada['numero'].grid(
             column=0, row=1, sticky="we", padx=20, pady=(20, 0))
 
         # Entrada de Pais
-        self.entrada__nombre = customtkinter.CTkEntry(
+        self.entrada['pais'] = customtkinter.CTkEntry(
             self, placeholder_text="Pais")
-        self.entrada__nombre.grid(
+        self.entrada['pais'].grid(
             column=0, row=2, sticky="we", padx=20, pady=(20, 0))
 
         # Entrada Fecha Nacimiento
-        self.entrada__nombre = customtkinter.CTkEntry(
+        self.entrada['fecha_na'] = customtkinter.CTkEntry(
             self, placeholder_text="Fecha Nacimiento")
-        self.entrada__nombre.grid(
+        self.entrada['fecha_na'].grid(
             column=0, row=3, sticky="we", padx=20, pady=(20, 0))
 
         # Boton Guardar
@@ -49,16 +51,13 @@ class VistaAgregarContacto(customtkinter.CTkFrame):
         self.boton__agregar_contacto.grid(
             row=5, column=0, sticky="we", padx=20, pady=(20, 0))
 
-    # Crear consulta de inserccion
-    def insertar_datos(self):
-        """
-        Crea la consulta y la manda a la base de datos
-        """
-        return 0
+    def inicializar(self):
+        # Crear consulta de inserccion
+        self.insertar_datos = self.controlador.insertar_datos
+        
+        # Funcion que limpia los campos
+        self.limpiar_campos = self.controlador.limpiar_campos
+        
+        # Funcion para volver menu principal
+        
 
-    # Fncion que limpia los campos
-    def limpiar_capos(self):
-        """
-        Limpiara los campos para proximas insercciones
-        """
-        return 0
