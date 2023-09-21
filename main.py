@@ -4,10 +4,12 @@ import customtkinter
 # Importando Vistas
 from views.vista__inicio import VistaInicio
 from views.vista__agregar_contacto import VistaAgregarContacto
+from views.vista__contacto import VistaContacto
 
 # Importando Controladores
 from controllers.controlador__inicio import ControladorInicio
 from controllers.controlador__agregar_contacto import ControladorAgregarContacto
+from controllers.contraldor__contacto import ControladorContacto
 
 
 class Aplicacion(customtkinter.CTk):
@@ -37,6 +39,11 @@ class Aplicacion(customtkinter.CTk):
         self.vista_agregar_contacto = VistaAgregarContacto(
             self, controlador_agregar_contacto)
         self.ajustar_frame(self.vista_agregar_contacto)
+
+        # VistaContacto
+        controlador_contacto = ControladorContacto(self)
+        self.vista_contacto = VistaContacto(self, controlador_contacto)
+        self.ajustar_frame(self.vista_contacto)
 
     def ajustar_frame(self, frame):
         frame.grid(row=0, column=0, sticky='nswe')
