@@ -15,13 +15,13 @@ class VistaInicio(customtkinter.CTkFrame):
         self.boton__agregar_contacto = customtkinter.CTkButton(
             self, width=WIDTH_BOTON, height=HEIGHT_BOTON, text="Agregar contacto", command=self.agregar_contactos)
         self.boton__agregar_contacto.grid(
-            row=0, column=0, sticky="we", padx=20, pady=20)
+            row=0, column=0, sticky="we", padx=20, pady=(20,0))
 
         # Boton Ver contactos
         self.boton__agregar_contacto = customtkinter.CTkButton(
             self, width=WIDTH_BOTON, height=HEIGHT_BOTON, text="Ver contactos", command=self.ver_contactos)
         self.boton__agregar_contacto.grid(
-            row=2, column=0, sticky="we", padx=20, pady=20)
+            row=2, column=0, sticky="we", padx=20, pady=(20,0))
 
     # Agregar Contacto
     def agregar_contactos(self):
