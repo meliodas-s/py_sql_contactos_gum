@@ -14,6 +14,7 @@ class VistaAgregarContacto(customtkinter.CTkFrame):
         self.boton = {}
 
         # Inicializando comandos
+        self.inicializar()
 
         # Entrada de Nombre
         self.entrada['nombre'] = customtkinter.CTkEntry(
@@ -47,17 +48,16 @@ class VistaAgregarContacto(customtkinter.CTkFrame):
 
         # Boton Cancelar
         self.boton__agregar_contacto = customtkinter.CTkButton(
-            self, width=WIDTH_BOTON, height=HEIGHT_BOTON, text="Cancelar", command=self.insertar_datos)
+            self, width=WIDTH_BOTON, height=HEIGHT_BOTON, text="Cancelar", command=self.cancelar)
         self.boton__agregar_contacto.grid(
             row=5, column=0, sticky="we", padx=20, pady=(20, 0))
 
     def inicializar(self):
         # Crear consulta de inserccion
         self.insertar_datos = self.controlador.insertar_datos
-        
+
         # Funcion que limpia los campos
         self.limpiar_campos = self.controlador.limpiar_campos
-        
-        # Funcion para volver menu principal
-        
 
+        # Funcion para volver menu principal
+        self.cancelar = self.controlador.cancelar
