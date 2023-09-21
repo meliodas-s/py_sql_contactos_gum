@@ -27,6 +27,7 @@ class Aplicacion(customtkinter.CTk):
         # VistaInicio
         controlador_inicio = ControladorInicio(self)
         self.vista_inicio = VistaInicio(self, controlador_inicio)
+        self.ajustar_frame(self.vista_inicio)
 
     def ajustar_frame(self, frame):
         frame.grid(row=0, column=0, sticky='nswe')
