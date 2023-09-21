@@ -7,6 +7,8 @@ from views.vista__agregar_contacto import VistaAgregarContacto
 
 # Importando Controladores
 from controllers.controlador__inicio import ControladorInicio
+from controllers.controlador__agregar_contacto import ControladorAgregarContacto
+
 
 class Aplicacion(customtkinter.CTk):
     def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
@@ -16,7 +18,7 @@ class Aplicacion(customtkinter.CTk):
         self.title("Titulo")
         self.geometry("500x700")
         self.minsize(400, 600)
-        self.maxsize(500,700)
+        self.maxsize(500, 700)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -29,9 +31,12 @@ class Aplicacion(customtkinter.CTk):
         controlador_inicio = ControladorInicio(self)
         self.vista_inicio = VistaInicio(self, controlador_inicio)
         self.ajustar_frame(self.vista_inicio)
-        
+
         # VistaAgregarContacto
-        controlador_agregar_contacto
+        controlador_agregar_contacto = ControladorAgregarContacto(self)
+        self.vista_agregar_contacto = VistaAgregarContacto(
+            self, controlador_agregar_contacto)
+        self.ajustar_frame(self.vista_agregar_contacto)
 
     def ajustar_frame(self, frame):
         frame.grid(row=0, column=0, sticky='nswe')
