@@ -50,33 +50,55 @@ class ControladorAgregarContacto:
             entrada.delete(0, customtkinter.END)
 
     def vericacion_datos(self, nombre, numero, pais, fecha_na):
+        """
+        Verifica que todas las etradas sean validas.
+
+        Args:
+            nombre (str): Nombre del contacto
+            numero (str): Numero del contacto
+            pais (str): Pais del contacto
+            fecha_na (str): Fecha de nacimiento del contacto (opcional)
+
+        Returns:
+            bool: True si los contactos son validos
+        """
+
         # Verifia datos, muestra mensaje de resultado.
         import re
-        telefono_regex = r'^\+\d{1,3}[-\s]+\d{1,14}[-\s]+\d{1,14}$'
-        
-        # Creo label para mostrar resultado
-        self.label_error = customtkinter.CTkLabel(self.master.vista_agregar_contacto)
+
+
 
         # Verificar telefono
-        if re.match(telefono_regex, numero):
+        regex = r'^\+\d{1,3}[-\s]+\d{1,14}[-\s]+\d{1,14}$'
+        if re.match(regex, numero):
             print('Numero valido')
-            self.label_error.configure(bg_color='green')
-            self.label_error.configure(text="Numer valido")
-            self.label_error.grid(column=0, row=6)
-            return True
 
         else:
             print('Numero invalido')
-            self.label_error.configure(bg_color='red')
-            self.label_error.configure(text="Numero invalido")
-            self.label_error.grid(column=0, row=6)
+            self.master.vista_agregar_contacto.label_error.configure(text="Numero invalido")
+            self.master.vista_agregar_contacto.label_error.grid(column=0, row=6, pady=(40, 0), padx=40)
             return False
 
+        # Verifica nombre
+        regex = r'.+'
+        if re.match(regex, nombre):
+            print('Nombre valido')
+
+            # Remuevo el mensaje de error si este existe
+            self.master.vista_agregar_contacto.label_error.grid_remove()
+            return True
+
+        else:
+            print('Nombre invalido')
+            self.master.vista_agregar_contacto.label_error.configure(text="Nombre invalido")
+            self.master.vista_agregar_contacto.label_error.grid(column=0, row=6, pady=(40, 0), padx=40)
+            return False
 
     def cancelar(self):
         """
         Regresa al menu principal al cancelara la operacion
         """
+        self.master.vista_agregar_contacto.label_error.grid_remove()
         self.master.cambiar_frame(self.master.vista_inicio)
 
     def mostrar_contacto(self, nombre, numero, pais, fecha_na):

@@ -6,4 +6,4 @@ class ControladorInicio:
         self.master.cambiar_frame(self.master.vista_agregar_contacto)
 
     def ver_contactos(self):
-        return 0
+        self.master.cambiar_frame(self.master.vista_mostrar_Contactos)

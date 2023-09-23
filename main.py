@@ -5,16 +5,21 @@ import customtkinter
 from views.vista__inicio import VistaInicio
 from views.vista__agregar_contacto import VistaAgregarContacto
 from views.vista__contacto import VistaContacto
+from views.vista__mostrar_contactos import VistaMostrarContactos
 
 # Importando Controladores
 from controllers.controlador__inicio import ControladorInicio
 from controllers.controlador__agregar_contacto import ControladorAgregarContacto
 from controllers.contraldor__contacto import ControladorContacto
-
+from controllers.controlador__mostrar_contactos import ControladorMostrarContactos
 
 class Aplicacion(customtkinter.CTk):
     def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
         super().__init__(fg_color, **kwargs)
+
+        # Constantes de uso general
+        self.WIDTH = 400
+        self.HEIGHT = 20
 
         # Configuraciones basicas
         self.title("Titulo")
@@ -39,6 +44,11 @@ class Aplicacion(customtkinter.CTk):
         self.vista_agregar_contacto = VistaAgregarContacto(
             self, controlador_agregar_contacto)
         self.ajustar_frame(self.vista_agregar_contacto)
+
+        # Vista mostrar contactos
+        controlador_mostrar_contactos = ControladorMostrarContactos(self)
+        self.vista_mostrar_Contactos = VistaMostrarContactos(self, controlador_mostrar_contactos)
+        self.ajustar_frame(self.vista_mostrar_Contactos)
 
         # VistaContacto
         controlador_contacto = ControladorContacto(self)

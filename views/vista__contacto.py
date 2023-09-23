@@ -15,10 +15,10 @@ class VistaContacto(customtkinter.CTkFrame):
         self.inicializar()
 
         # Imagen del contacto
-        image = Image.open("./images/01contacto.png").resize((100, 100))
-        photo = ImageTk.PhotoImage(image)
+        image = Image.open("./images/01contacto.png")
+        photo = customtkinter.CTkImage(image, size=(200,200))
         self.image_label = customtkinter.CTkLabel(
-            self, image=photo, text="", width=100, height=100)
+            self, image=photo, text="", width=200, height=200)
         self.image_label.grid(column=0, row=0, pady=(20, 0), padx=20)
 
         # Nombre del contacto
