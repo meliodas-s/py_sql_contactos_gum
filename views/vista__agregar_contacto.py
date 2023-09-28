@@ -39,7 +39,7 @@ class VistaAgregarContacto(customtkinter.CTkFrame):
 
         # Entrada Fecha Nacimiento
         self.entrada['fecha_na'] = customtkinter.CTkEntry(
-            self, width=master.WIDTH, placeholder_text="Fecha Nacimiento aaaa-mm-dd")
+            self, width=master.WIDTH, placeholder_text="Fecha Nacimiento dd-mm-aaaa")
         self.entrada['fecha_na'].grid(
             column=0, row=3, padx=20, pady=(20, 0))
 

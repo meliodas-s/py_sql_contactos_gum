@@ -20,10 +20,26 @@ class ControladorAgregarContacto:
         # Si son datos validos los guardamos
         if mi_booleano:
             self.verificiado(nombre, numero, pais, fecha_na)
+            self.master.vista_mostrar_Contactos.nuevo_contacto(self.nuevo_id)
         else:
             return 0
 
     def verificiado(self, nombre, numero, pais, fecha_na):
+        """
+        Descripcion:
+            Conecta con la base de datos y guarda el nuevo registro.
+
+        Args:
+            self (ControladorAgregarContacto): Objeto
+            nombre (str) : Nuevo nombre
+            numero (str) : Nuevo numero en el formato correcto
+            pais (str) : Pais del sujeto, es valida cualquier entrada de texto. Es opcional, puede estar vacio
+            fecha_na (str) : Fechas en formato dd-mm-aaaa
+
+        Returns:
+            int : Id del nuevo registro de contacto
+        """
+
         # Conectando con sqlite3
         import sqlite3
         conn = sqlite3.connect('./data/contactos.db')
@@ -41,6 +57,9 @@ class ControladorAgregarContacto:
 
         # Cambiar para ver el contacto agregado
         self.mostrar_contacto(nombre, numero, pais, fecha_na)
+
+        # Retornar nuevo id de nuevo contacto, aunque ya es un atributo
+        return self.nuevo_id
 
     def limpiar_campos(self):
         """
@@ -66,8 +85,6 @@ class ControladorAgregarContacto:
         # Verifia datos, muestra mensaje de resultado.
         import re
 
-
-
         # Verificar telefono
         regex = r'^\+\d{1,3}[-\s]+\d{1,14}[-\s]+\d{1,14}$'
         if re.match(regex, numero):
@@ -75,8 +92,10 @@ class ControladorAgregarContacto:
 
         else:
             print('Numero invalido')
-            self.master.vista_agregar_contacto.label_error.configure(text="Numero invalido")
-            self.master.vista_agregar_contacto.label_error.grid(column=0, row=6, pady=(40, 0), padx=40)
+            self.master.vista_agregar_contacto.label_error.configure(
+                text="Numero invalido")
+            self.master.vista_agregar_contacto.label_error.grid(
+                column=0, row=6, pady=(40, 0), padx=40)
             return False
 
         # Verifica nombre
@@ -86,12 +105,30 @@ class ControladorAgregarContacto:
 
             # Remuevo el mensaje de error si este existe
             self.master.vista_agregar_contacto.label_error.grid_remove()
-            return True
 
         else:
             print('Nombre invalido')
-            self.master.vista_agregar_contacto.label_error.configure(text="Nombre invalido")
-            self.master.vista_agregar_contacto.label_error.grid(column=0, row=6, pady=(40, 0), padx=40)
+            self.master.vista_agregar_contacto.label_error.configure(
+                text="Nombre esta vacio")
+            self.master.vista_agregar_contacto.label_error.grid(
+                column=0, row=6, pady=(40, 0), padx=40)
+            return False
+
+        # Verificar fecha
+        regex = r'^\d{2}[-]+\d{2}[-]+\d{4}$'
+        if re.match(regex, fecha_na) or fecha_na == "":
+            print("Formato de fecha valida o fecha vacia")
+
+            # Remuevo el mensaje de error si este existe
+            self.master.vista_agregar_contacto.label_error.grid_remove()
+            return True
+
+        else:
+            print('Formato de fecha invalida')
+            self.master.vista_agregar_contacto.label_error.configure(
+                text="Formato de fecha invalido")
+            self.master.vista_agregar_contacto.label_error.grid(
+                column=0, row=6, pady=(40, 0), padx=40)
             return False
 
     def cancelar(self):
